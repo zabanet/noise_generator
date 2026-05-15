@@ -1,0 +1,329 @@
+:root {
+    --bg-page: #0d0d14;
+    --bg-card: #14141f;
+    --bg-surface: #1c1c2a;
+    --bg-input: #22223a;
+    --border: #2c2c42;
+    --text-primary: #e8e8f0;
+    --text-secondary: #8888a8;
+    --text-muted: #4a4a66;
+    --accent: #7c6af6;
+    --accent-light: #9e90f9;
+    --accent-bg: #1e1a46;
+    --stop: #e05575;
+    --stop-light: #f07090;
+    --success: #52c99a;
+    --error-bg: rgba(224, 85, 117, 0.12);
+    --error-border: #e05575;
+    --error-text: #f09090;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* App layout */
+
+.app {
+    width: 100%;
+    max-width: 420px;
+}
+
+.app-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.app-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+/* Sections */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.section-title {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+/* Noise Selector */
+
+.noise-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.noise-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.noise-btn:hover:not(:disabled) {
+    background: var(--accent-bg);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.noise-btn--selected {
+    background: var(--accent-bg);
+    border-color: var(--accent);
+    color: var(--accent-light);
+    font-weight: 600;
+}
+
+.noise-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Volume Slider */
+
+.volume-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.volume-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.volume-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    /* --fill is set as inline style from VolumeSlider component */
+    background: linear-gradient(to right,
+            var(--accent) var(--fill, 15%),
+            var(--bg-input) var(--fill, 15%));
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-card);
+    transition: background 0.15s ease;
+}
+
+.volume-range:hover::-webkit-slider-thumb {
+    background: var(--accent-light);
+}
+
+.volume-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-card);
+    box-sizing: border-box;
+    transition: background 0.15s ease;
+}
+
+.volume-range::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-input);
+}
+
+.volume-range::-moz-range-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+
+.volume-value {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    min-width: 3rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Playback Button */
+
+.playback-btn {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.playback-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.playback-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.playback-btn--start {
+    background: var(--accent);
+    color: #fff;
+}
+
+.playback-btn--start:hover {
+    background: var(--accent-light);
+}
+
+.playback-btn--stop {
+    background: var(--stop);
+    color: #fff;
+}
+
+.playback-btn--stop:hover {
+    background: var(--stop-light);
+}
+
+/* Status Panel */
+
+.status-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.status-label {
+    color: var(--text-muted);
+}
+
+.status-value {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.status-playback {
+    color: var(--text-muted);
+}
+
+.status-playback--playing {
+    color: var(--success);
+    font-weight: 600;
+}
+
+/* Error message */
+
+.error-message {
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+    color: var(--error-text);
+    line-height: 1.5;
+}
+
+/* Focus styles */
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    body {
+        padding: 0.75rem;
+        align-items: flex-start;
+        padding-top: 1.5rem;
+    }
+
+    .app-card {
+        padding: 1.5rem 1.25rem;
+        gap: 1.5rem;
+        border-radius: var(--radius-md);
+    }
+
+    .noise-btn {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.75rem;
+    }
+}
